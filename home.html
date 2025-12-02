@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pleasant Tours - Explore the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 80px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Products Section */
+        .products {
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            padding: 12px 25px;
+            background-color: white;
+            border: 2px solid var(--secondary);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .product-info p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background-color: white;
+        }
+
+        .itinerary-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .itinerary-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            background-color: var(--light);
+            border-radius: 0 10px 10px 0;
+            /* Highlight style for target */
+            transition: all 0.3s ease;
+        }
+        
+        /* Style for the target itinerary item when navigated to */
+        .itinerary-item:target {
+            background-color: #cce0f5; /* Light blue background when targeted */
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .itinerary-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Price List Section */
+        .price-list {
+            background-color: var(--light);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .price-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-details {
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: white;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .product-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="25" cy="25" r="20" fill="#3498db" />
+                    <path d="M25 10 L35 30 L15 30 Z" fill="white" />
+                    <circle cx="25" cy="20" r="5" fill="#e74c3c" />
+                </svg>
+                <h1>Pleasant Tours</h1>
+            </div>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Tours</a></li>
+                <li><a href="#itinerary">Itinerary</a></li>
+                <li><a href="#prices">Prices</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Discover the World with Pleasant Tours</h2>
+            <p>Experience unforgettable journeys to breathtaking destinations with our expertly crafted tour packages.</p>
+            <a href="#products" class="btn">Explore Tours</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Pleasant Tours</h2>
+                    <p>Welcome to Pleasant Tours, your gateway to extraordinary travel experiences. With over 15 years in the tourism industry, we specialize in creating memorable journeys that connect you with the world's most beautiful destinations.</p>
+                    <p>Our team of travel experts carefully designs each tour package to ensure you get the most out of your vacation, whether you're seeking relaxation on pristine beaches, adventure in majestic mountains, or cultural immersion in historic cities.</p>
+                    <p>At Pleasant Tours, we believe that travel should be accessible, enjoyable, and transformative. Let us handle the details while you focus on creating lifelong memories.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Travel Experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Tour Products</h2>
+                <p>Explore our diverse range of tour categories</p>
+            </div>
+            <div class="product-categories">
+                <button class="category-btn active" data-category="all">All Tours</button>
+                <button class="category-btn" data-category="beach">Beach Tours</button>
+                <button class="category-btn" data-category="hill">Hill Stations</button>
+                <button class="category-btn" data-category="fort">Forts & Palaces</button>
+                <button class="category-btn" data-category="cultural">Cultural Tours</button>
+            </div>
+            <div class="products-grid">
+                <!-- Beach Tours -->
+                <div class="product-card" data-category="beach">
+                    <div class="product-image">
+                        <img src="TP.jpg" alt="Tropical Paradise">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="tropical-paradise">Tropical Paradise</h3>
+                        <p>7 days of sun, sand, and crystal-clear waters in the most beautiful tropical destinations.</p>
+                        <div class="product-price">$1,299</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-tropical-paradise" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Hill Station Tours -->
+                <div class="product-card" data-category="hill">
+                    <div class="product-image">
+                        <img src="ME.jpg" alt="Mountain Escape">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="mountain-escape">Mountain Escape</h3>
+                        <p>Explore serene hill stations with breathtaking views and refreshing mountain air.</p>
+                        <div class="product-price">$899</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-mountain-escape" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Forts & Palaces -->
+                <div class="product-card" data-category="fort">
+                    <div class="product-image">
+                        <img src="RH.jpg" alt="Royal Heritage">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="royal-heritage">Royal Heritage</h3>
+                        <p>Journey through history with visits to magnificent forts and opulent palaces.</p>
+                        <div class="product-price">$1,199</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-royal-heritage" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Cultural Tours -->
+                <div class="product-card" data-category="cultural">
+                    <div class="product-image">
+                        <img src="CI.jpg" alt="Cultural Immersion">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="cultural-immersion">Cultural Immersion</h3>
+                        <p>Experience authentic local traditions, cuisine, and festivals in vibrant destinations.</p>
+                        <div class="product-price">$1,499</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-cultural-immersion" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Additional Beach Tour -->
+                <div class="product-card" data-category="beach">
+                    <div class="product-image">
+                        <img src="CR.jpg" alt="Coastal Retreat">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="coastal-retreat">Coastal Retreat</h3>
+                        <p>Relax and rejuvenate with our exclusive beachfront accommodation and activities.</p>
+                        <div class="product-price">$1,599</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-coastal-retreat" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Additional Hill Station Tour -->
+                <div class="product-card" data-category="hill">
+                    <div class="product-image">
+                        <img src="AA.jpg" alt="Alpine Adventure">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-tour-id="alpine-adventure">Alpine Adventure</h3>
+                        <p>Thrilling mountain activities combined with cozy accommodations in scenic locations.</p>
+                        <div class="product-price">$1,099</div>
+                        <!-- Updated to navigate to specific itinerary -->
+                        <a href="#itinerary-alpine-adventure" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section id="itinerary" class="itinerary">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Itineraries</h2>
+                <p>Detailed day-by-day plans for our popular tours</p>
+            </div>
+            <div class="itinerary-content">
+                <!-- ITINERARY 1: Tropical Paradise -->
+                <div class="itinerary-item" id="itinerary-tropical-paradise" data-tour-name="Tropical Paradise">
+                    <h3>Tropical Paradise - 7 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival at island airport and transfer to resort. Evening welcome dinner by the beach.</p>
+                    <p><strong>Day 2:</strong> Morning: Beach relaxation and complimentary water sports (kayaking, paddleboarding). Afternoon: Sunset view from the infinity pool.</p>
+                    <p><strong>Day 3:</strong> Full-day island hopping tour, including three different snorkeling spots and a secluded picnic lunch.</p>
+                    <p><strong>Day 4:</strong> Cultural village tour on a nearby island, followed by a hands-on local cuisine cooking experience.</p>
+                    <p><strong>Day 5:</strong> Free day for personal exploration, optional scuba diving lesson, or spa treatment.</p>
+                    <p><strong>Day 6:</strong> Romantic sunset cruise with cocktails and a special farewell dinner.</p>
+                    <p><strong>Day 7:</strong> Breakfast and departure to the airport.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('tropical-paradise')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+                
+                <!-- ITINERARY 2: Mountain Escape -->
+                <div class="itinerary-item" id="itinerary-mountain-escape" data-tour-name="Mountain Escape">
+                    <h3>Mountain Escape - 5 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival at mountain base and scenic transfer to chalet accommodation with panoramic views. Orientation session.</p>
+                    <p><strong>Day 2:</strong> Guided 4-hour hike through the famous 'Whispering Trails.' Lunch at a high-altitude tea house.</p>
+                    <p><strong>Day 3:</strong> Morning: Visit to local artisan markets and the historic town square. Afternoon: Free time for photography or relaxation.</p>
+                    <p><strong>Day 4:</strong> Adventure activities: Choose between white-water rafting (seasonal) or a cable car ride to the highest accessible peak.</p>
+                    <p><strong>Day 5:</strong> Breakfast and departure with a packed gourmet lunch for the road.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('mountain-escape')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+                
+                <!-- ITINERARY 3: Royal Heritage -->
+                <div class="itinerary-item" id="itinerary-royal-heritage" data-tour-name="Royal Heritage">
+                    <h3>Royal Heritage - 6 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival in the capital city. Transfer to a heritage hotel.</p>
+                    <p><strong>Day 2:</strong> Full-day exploration of the main **Fortress** with a certified historian guide, covering defensive walls and royal quarters.</p>
+                    <p><strong>Day 3:</strong> Visit the opulent **Grand Palace**, including the private rooms and the famous Hall of Mirrors. Afternoon tour of the Royal Gardens.</p>
+                    <p><strong>Day 4:</strong> Morning: Visits to the city's key museums detailing the local dynasty's history. Evening: Traditional cultural performance.</p>
+                    <p><strong>Day 5:</strong> Hands-on workshop on traditional craft (e.g., miniature painting or pottery). Farewell dinner in a palace courtyard.</p>
+                    <p><strong>Day 6:</strong> Breakfast and departure.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('royal-heritage')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+
+                <!-- ITINERARY 4: Cultural Immersion (Added to complete the product list) -->
+                <div class="itinerary-item" id="itinerary-cultural-immersion" data-tour-name="Cultural Immersion">
+                    <h3>Cultural Immersion - 8 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival and transfer to a local family-run homestay for authentic experience.</p>
+                    <p><strong>Day 2:</strong> Guided walking tour of the old city's hidden lanes and temples. Evening: Traditional cooking class.</p>
+                    <p><strong>Day 3:</strong> Day trip to nearby artisan villages known for weaving and woodwork.</p>
+                    <p><strong>Day 4-5:</strong> Participation in a local community festival or market day.</p>
+                    <p><strong>Day 6:</strong> Exploration of local farming practices and nature reserves.</p>
+                    <p><strong>Day 7:</strong> Reflective free morning. Afternoon: Farewell tea ceremony with the host family.</p>
+                    <p><strong>Day 8:</strong> Departure.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('cultural-immersion')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+
+                <!-- ITINERARY 5: Coastal Retreat (Added to complete the product list) -->
+                <div class="itinerary-item" id="itinerary-coastal-retreat" data-tour-name="Coastal Retreat">
+                    <h3>Coastal Retreat - 7 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival at coastal resort. Free time to settle in and enjoy the private beach area.</p>
+                    <p><strong>Day 2:</strong> Morning yoga session by the sea. Guided snorkeling tour of the coral reefs.</p>
+                    <p><strong>Day 3:</strong> Sailing excursion to a remote bay for swimming and sunbathing.</p>
+                    <p><strong>Day 4:</strong> Relaxation day: optional spa treatment or explore the nearby town at your leisure.</p>
+                    <p><strong>Day 5:</strong> Sunset fishing trip with a fresh seafood dinner prepared by the crew.</p>
+                    <p><strong>Day 6:</strong> Visit to a marine conservation center to learn about local wildlife.</p>
+                    <p><strong>Day 7:</strong> Departure.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('coastal-retreat')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+
+                <!-- ITINERARY 6: Alpine Adventure (Added to complete the product list) -->
+                <div class="itinerary-item" id="itinerary-alpine-adventure" data-tour-name="Alpine Adventure">
+                    <h3>Alpine Adventure - 6 Days</h3>
+                    <p><strong>Day 1:</strong> Arrival in the Alpine town. Check-in to a traditional lodge.</p>
+                    <p><strong>Day 2:</strong> Guided climb or via ferrata experience (depending on skill level).</p>
+                    <p><strong>Day 3:</strong> Full day dedicated to exploring high-altitude lakes and valleys by mountain bike (bikes provided).</p>
+                    <p><strong>Day 4:</strong> Visit the local cheese and chocolate factories. Learn about the region's culinary heritage.</p>
+                    <p><strong>Day 5:</strong> Leisure day or optional paragliding/ziplining activity for adrenaline seekers.</p>
+                    <p><strong>Day 6:</strong> Breakfast and departure.</p>
+                    <a href="#" class="download-link" onclick="downloadItinerary('alpine-adventure')">
+                        <i class="fas fa-download"></i> Download Full Itinerary (PDF)
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Price List Section -->
+    <section id="prices" class="price-list">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tour Price List</h2>
+                <p>Comprehensive pricing for all our tour packages</p>
+            </div>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Tour Package</th>
+                        <th>Duration</th>
+                        <th>Price (per person)</th>
+                        <th>Season</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tropical Paradise</td>
+                        <td>7 days / 6 nights</td>
+                        <td>$1,299</td>
+                        <td>All year</td>
+                    </tr>
+                    <tr>
+                        <td>Mountain Escape</td>
+                        <td>5 days / 4 nights</td>
+                        <td>$899</td>
+                        <td>March - November</td>
+                    </tr>
+                    <tr>
+                        <td>Royal Heritage</td>
+                        <td>6 days / 5 nights</td>
+                        <td>$1,199</td>
+                        <td>All year</td>
+                    </tr>
+                    <tr>
+                        <td>Cultural Immersion</td>
+                        <td>8 days / 7 nights</td>
+                        <td>$1,499</td>
+                        <td>All year</td>
+                    </tr>
+                    <tr>
+                        <td>Coastal Retreat</td>
+                        <td>7 days / 6 nights</td>
+                        <td>$1,599</td>
+                        <td>April - October</td>
+                    </tr>
+                    <tr>
+                        <td>Alpine Adventure</td>
+                        <td>6 days / 5 nights</td>
+                        <td>$1,099</td>
+                        <td>June - September</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="price-actions">
+                <!-- Updated Price List Download Link -->
+                <a href="#" onclick="downloadPriceList()" class="btn btn-accent">
+                    <i class="fas fa-file-download"></i> Download Complete Price List
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our travel experts</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Our Office</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>123 Travel Street, Tourism City<br>TC 12345, Pleasantland</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@pleasantoours.com">info@pleasantoours.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pleasant Tours</h3>
+                    <p>Creating unforgettable travel experiences since 2008. Let us take you on a journey of discovery and adventure.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">Tour Packages</a></li>
+                        <li><a href="#prices">Price List</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Tour Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#products" data-category="beach">Beach Tours</a></li>
+                        <li><a href="#products" data-category="hill">Hill Stations</a></li>
+                        <li><a href="#products" data-category="fort">Forts & Palaces</a></li>
+                        <li><a href="#products" data-category="cultural">Cultural Tours</a></li>
+                        <li><a href="#products">All Tours</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest travel deals and destination insights.</p>
+                    <form class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your email address" required>
+                        </div>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Pleasant Tours. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STRUCTURE FOR ITINERARY PDF GENERATION ---
+        const itineraries = {
+            'tropical-paradise': {
+                name: 'Tropical Paradise',
+                content: `
+PLEASANT TOURS - TROPICAL PARADISE (7 Days / 6 Nights)
+
+Day 1: Arrival & Welcome Dinner
+- Arrive at island airport, private transfer to beachfront resort.
+- Check-in and free time.
+- Evening: Welcome dinner by the beach (seafood special).
+
+Day 2: Beach Fun & Water Sports
+- Morning: Complimentary water sports (kayaking, paddleboarding).
+- Afternoon: Relaxation by the pool or on the private beach.
+- Sunset viewing from the infinity pool deck.
+
+Day 3: Island Hopping Adventure
+- Full-day excursion to three secluded islands.
+- Snorkeling and swimming at coral reefs.
+- Secluded picnic lunch provided on a remote beach.
+
+Day 4: Cultural Day
+- Morning: Guided tour of a local cultural village.
+- Afternoon: Hands-on cooking class focused on local island cuisine.
+
+Day 5: Leisure Day
+- Free day for optional activities (scuba diving, spa treatment) or personal exploration.
+
+Day 6: Farewell Cruise
+- Morning: Shopping for souvenirs.
+- Afternoon: Prepare for departure.
+- Evening: Romantic sunset cruise with cocktails and a special farewell dinner.
+
+Day 7: Departure
+- Breakfast and transfer to the airport.
+`
+            },
+            'mountain-escape': {
+                name: 'Mountain Escape',
+                content: `
+PLEASANT TOURS - MOUNTAIN ESCAPE (5 Days / 4 Nights)
+
+Day 1: Arrival & Orientation
+- Arrive at mountain base, scenic transfer to an Alpine chalet.
+- Check-in and orientation session on safety and local trails.
+
+Day 2: Guided Hiking
+- Morning: Guided 4-hour hike through the 'Whispering Trails' (moderate difficulty).
+- Lunch: Traditional meal at a high-altitude tea house.
+- Evening: Campfire and stargazing (weather permitting).
+
+Day 3: Town & Culture
+- Morning: Visit to local artisan markets and the historic town square.
+- Afternoon: Free time for photography, rest, or optional short nature walk.
+
+Day 4: Adventure Activities
+- Choice of: White-water rafting (seasonal) OR a scenic cable car ride to the highest accessible peak.
+- Evening: Group dinner at a famous local restaurant.
+
+Day 5: Departure
+- Breakfast and check-out.
+- Transfer back to the base with a packed gourmet lunch.
+`
+            },
+            'royal-heritage': {
+                name: 'Royal Heritage',
+                content: `
+PLEASANT TOURS - ROYAL HERITAGE (6 Days / 5 Nights)
+
+Day 1: Arrival & Check-in
+- Arrival in the historic capital city.
+- Private transfer to a luxurious heritage hotel.
+- Evening: Welcome dinner and orientation.
+
+Day 2: The Fortress
+- Full-day guided exploration of the main **Fortress**.
+- Detailed tour by a certified historian, covering defensive walls and royal quarters.
+
+Day 3: Palaces & Gardens
+- Morning: Visit the opulent **Grand Palace**, including the Hall of Mirrors.
+- Afternoon: Tour of the manicured Royal Gardens.
+
+Day 4: History & Performance
+- Morning: Visits to key city museums detailing the local dynasty's history.
+- Evening: Attend a traditional folk cultural performance.
+
+Day 5: Craft & Farewell
+- Hands-on workshop on a traditional craft (e.g., miniature painting or pottery).
+- Evening: Farewell dinner hosted in a palace courtyard.
+
+Day 6: Departure
+- Breakfast and transfer to the airport.
+`
+            },
+            'cultural-immersion': {
+                name: 'Cultural Immersion',
+                content: `
+PLEASANT TOURS - CULTURAL IMMERSION (8 Days / 7 Nights)
+
+Day 1: Arrival & Homestay
+- Arrive and transfer to a local family-run homestay.
+- Welcome dinner with the host family, learning local customs.
+
+Day 2: City Exploration & Cooking
+- Morning: Guided walking tour of the old city's hidden lanes and temples.
+- Evening: Traditional cooking class using local ingredients.
+
+Day 3: Artisan Villages
+- Full-day trip to nearby villages famous for weaving and woodwork.
+- Opportunity to purchase authentic handmade crafts.
+
+Day 4-5: Festival/Market Participation
+- Active participation in a local community festival or market day (depending on schedule).
+
+Day 6: Nature & Farming
+- Exploration of local farming practices and nearby nature reserves.
+
+Day 7: Relaxation & Ceremony
+- Free morning for reflection or last-minute souvenir shopping.
+- Afternoon: Farewell tea ceremony with the host family.
+
+Day 8: Departure
+- Breakfast and transfer to the airport.
+`
+            },
+            'coastal-retreat': {
+                name: 'Coastal Retreat',
+                content: `
+PLEASANT TOURS - COASTAL RETREAT (7 Days / 6 Nights)
+
+Day 1: Arrival & Check-in
+- Arrive at the coastal resort. Free time to settle in and enjoy the private beach.
+
+Day 2: Wellness & Snorkeling
+- Morning: Complimentary beach yoga session.
+- Afternoon: Guided snorkeling tour of nearby coral reefs.
+
+Day 3: Sailing Excursion
+- Full-day sailing trip to a remote, quiet bay. Swimming, sunbathing, and relaxation.
+
+Day 4: Leisure Day
+- Total relaxation day: optional spa treatment or explore the nearby coastal town.
+
+Day 5: Sunset Fishing
+- Late afternoon fishing trip. The catch will be prepared for your dinner by the crew.
+
+Day 6: Marine Conservation
+- Visit to a local marine conservation center to learn about the ocean environment and wildlife.
+
+Day 7: Departure
+- Breakfast and transfer to the airport.
+`
+            },
+            'alpine-adventure': {
+                name: 'Alpine Adventure',
+                content: `
+PLEASANT TOURS - ALPINE ADVENTURE (6 Days / 5 Nights)
+
+Day 1: Arrival & Lodge
+- Arrive in the Alpine town. Check-in to a traditional mountain lodge.
+
+Day 2: Climb/Via Ferrata
+- Guided climb or Via Ferrata experience (gear provided, skill level assessed).
+
+Day 3: Mountain Biking
+- Full day dedicated to exploring high-altitude lakes and valleys by mountain bike (guided tour, bikes provided).
+
+Day 4: Culinary Tour
+- Visit the local cheese and chocolate factories. Learn about the region's culinary heritage and sample products.
+
+Day 5: Thrill Seekers Day
+- Leisure day OR optional paragliding/ziplining activity (extra cost).
+
+Day 6: Departure
+- Breakfast and transfer to the departure point.
+`
+            }
+        };
+
+        // Function to create and download a file
+        function createFileDownload(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 1. Specific Itinerary Download Function
+        function downloadItinerary(tourId) {
+            const tour = itineraries[tourId];
+            if (tour) {
+                createFileDownload(tour.content, `${tourId.replace(/-/g, '_')}_Itinerary.txt`);
+                alert(`Downloading Detailed Itinerary for: ${tour.name}. (Saved as a .txt file for demonstration)`);
+            } else {
+                alert('Itinerary details not found.');
+            }
+        }
+        
+        // General Price List Download Function
+        function downloadPriceList() {
+            const priceListContent = `
+PLEASANT TOURS - COMPLETE PRICE LIST
+
+Package Name | Duration | Price (per person) | Season
+--------------------------------------------------------------
+Tropical Paradise | 7 days / 6 nights | $1,299 | All year
+Mountain Escape | 5 days / 4 nights | $899 | March - November
+Royal Heritage | 6 days / 5 nights | $1,199 | All year
+Cultural Immersion | 8 days / 7 nights | $1,499 | All year
+Coastal Retreat | 7 days / 6 nights | $1,599 | April - October
+Alpine Adventure | 6 days / 5 nights | $1,099 | June - September
+
+NOTE: Prices are subject to change and do not include international airfare.
+Contact us for group discounts and custom packages.
+`;
+            createFileDownload(priceListContent, 'PleasantTours_PriceList.txt');
+            alert('Downloading Complete Price List. (Saved as a .txt file for demonstration)');
+        }
+
+        // Mobile Navigation Toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-menu').classList.remove('active');
+            });
+        });
+
+        // Active navigation link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            let current = '';
+            sections.forEach(section => {
+                // Adjusted offset for fixed header
+                const sectionTop = section.offsetTop - 100; 
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Product category filtering
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Filter products
+                const category = this.getAttribute('data-category');
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (category === 'all' || product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Footer category links
+        document.querySelectorAll('.footer-links a[data-category]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const category = this.getAttribute('data-category');
+                
+                // Update active button in products section
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-category') === category) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Filter products
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (category === 'all' || product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+                
+                // Scroll to products section
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Replaced alert with custom, simple alert message (as per rule)
+            const messageBox = document.createElement('div');
+            messageBox.innerHTML = 'Thank you for your message! We will get back to you soon.';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: var(--secondary);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                z-index: 2000;
+                font-weight: bold;
+                text-align: center;
+            `;
+            document.body.appendChild(messageBox);
+            
+            setTimeout(() => {
+                document.body.removeChild(messageBox);
+            }, 3000);
+            
+            this.reset();
+        });
+
+        // 2. View Details Button Logic
+        // This ensures the page scrolls correctly to the specific itinerary item
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    // Use scrollIntoView with block: 'start' and a slight margin for the fixed header
+                    window.scroll({
+                        top: targetElement.offsetTop - 100, // Adjust for fixed header height
+                        behavior: 'smooth'
+                    });
+
+                    // Temporarily highlight the target item (optional but nice UX)
+                    targetElement.classList.add('highlight-target');
+                    setTimeout(() => {
+                        targetElement.classList.remove('highlight-target');
+                    }, 2000);
+                }
+            });
+        });
+
+        // Add class to highlight target when navigating via URL hash (for first load/direct link)
+        if (window.location.hash) {
+             const targetId = window.location.hash.substring(1);
+             const targetElement = document.getElementById(targetId);            
+             if (targetElement) {
+
+                targetElement.classList.add('highlight-target');
+                setTimeout(() => {
+                    targetElement.classList.remove('highlight-target');
+                }, 2000);
+             }          
+        }
+    </script>
+</body>
+</html>
